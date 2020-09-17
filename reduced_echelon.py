@@ -59,7 +59,6 @@ def backward_helper(A, row):
     """
     # base case
     if row == 0:
-        print("\nDONE\n", A)
         return A
     
     # recursive case
