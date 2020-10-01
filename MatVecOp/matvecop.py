@@ -289,7 +289,7 @@ def forward_helper(A, start_row, start_column, end_row, end_column):
             temp_row = end_row
             while is_zero(mat_get_sub(mat_get_row(A, temp_row), 0, column, 0, end_column)):
                 temp_row -= 1
-            if temp_row == row:
+            if temp_row <= row:
                 return A
             else:
                 A = row_interchange(A, row, temp_row)
