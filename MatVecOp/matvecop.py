@@ -351,3 +351,20 @@ def reduced_echelon_form(A):
     def backward(A):
         return backward_helper(A,0,0, len(A)-1, len(A[0])-1)
     return backward(forward(A))
+
+# transition change_of_basis
+def change_of_basis(A, B):
+    """
+    Change the basis from A -> B
+    """
+    m_A, n_A = dim(A)
+    if not dim(A)[0] == dim(A)[1]:
+        return f"Can not inverse a non-square matrix {dim(A)}"
+    C = mat_augmented(B,A)
+    C = backward_helper(forward_helper(C, 0, 0, m_A-1, n_A-1), 0, 0, m_A-1, n_A-1)
+    inv = mat_get_col(C, n_A)
+    for j in range(n_A+1, n_A+n_A):
+        inv = mat_augmented(inv, mat_get_col(C, j))
+    if is_zero(mat_get_sub(C, len(C)-1,0,len(C)-1, m_A-1)):
+        return "This matrix has no inverse"
+    return inv
